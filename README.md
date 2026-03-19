@@ -10,6 +10,18 @@ Syncs the current git branch to the latest `upstream/main`. Checks for uncommitt
 
 Usage: `/rebase-upstream-main`
 
+## Plugins
+
+### confirm-gh-writes
+
+A PreToolUse hook that blocks GitHub CLI write operations (`gh pr create`, `gh issue close`, `gh release create`, `git push`, etc.) and requires explicit user approval before execution.
+
+Install as a plugin:
+
+```sh
+claude --plugin-dir /path/to/agent-skills/confirm-gh-writes
+```
+
 ## Installation
 
 Symlink individual skills into `~/.claude/skills/`:
