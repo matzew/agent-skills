@@ -1,0 +1,8 @@
+{
+    "name": "confirm-gh-writes",
+    "description": "Block GitHub CLI write operations and git push, requiring explicit user approval before execution.",
+    "version": "0.1.0",
+    "author": {
+        "name": "Matthias Wessendorf"
+    }
+}
