@@ -10,6 +10,12 @@ Syncs the current git branch to the latest `upstream/main`. Checks for uncommitt
 
 Usage: `/rebase-upstream-main`
 
+### jira-cli
+
+Handles all Jira operations using the locally installed `jira` CLI. Covers listing, creating, editing, transitioning, and commenting on issues, epics, sprints, and boards. Activates automatically when a Jira project key or issue key is mentioned.
+
+Usage: ask about any Jira ticket (e.g. "show me OCPMCP-42") and the skill activates automatically.
+
 ## Plugins
 
 ### confirm-gh-writes
@@ -23,6 +29,33 @@ claude --plugin-dir /path/to/agent-skills/confirm-gh-writes
 ```
 
 ## Installation
+
+### As OCI image (recommended)
+
+The repo builds a `scratch`-based OCI image that can be mounted directly into sandbox containers:
+
+```sh
+podman build -t quay.io/myorg/agent-skills:latest .
+```
+
+Mount into a container with podman:
+
+```sh
+podman run --rm -it \
+  --mount type=image,src=quay.io/myorg/agent-skills:latest,dst=/opt/skills-0,readwrite=false \
+  my-sandbox:latest
+```
+
+Inside the container, symlink the skills so Claude Code discovers them:
+
+```sh
+mkdir -p "$HOME/.claude/skills"
+for d in /opt/skills-*/skills/*/; do
+  ln -sfn "$d" "$HOME/.claude/skills/$(basename "$d")"
+done
+```
+
+### Manual symlinks
 
 Symlink individual skills into `~/.claude/skills/`:
 
