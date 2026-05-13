@@ -16,6 +16,12 @@ Handles all Jira operations using the locally installed `jira` CLI. Covers listi
 
 Usage: ask about any Jira ticket (e.g. "show me OCPMCP-42") and the skill activates automatically.
 
+### k8s-deep-derivative
+
+Reviews Kubernetes controller reconciliation code for correct use of the `DeepDerivative`/`DeepEqual` hybrid pattern. Catches missing explicit equality checks for removable fields (slices, maps, pointers, strings) that `DeepDerivative` silently skips, preventing both spurious updates from API server defaulting and missed user field removals.
+
+Usage: invoke when writing or reviewing controller update-detection logic for Deployments, StatefulSets, DaemonSets, Jobs, etc.
+
 ## Plugins
 
 ### confirm-gh-writes
